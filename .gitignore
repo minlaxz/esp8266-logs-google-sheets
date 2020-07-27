@@ -1,3 +1,7 @@
 device.log
 key.json
 google_key.json
+__pycache__
+main.conf
+key.json
+decent-bird-key.json
