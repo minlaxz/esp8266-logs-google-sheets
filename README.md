@@ -1,6 +1,6 @@
-# Weather station based on ESP32 and MicroPython
+# Weather station based on ESP32 & ESP8266 and MicroPython
 
-This is a weather station based on ESP32 and MicroPython.
+This is a weather station based on ESP32 & ESP8266 and MicroPython.
 
 Here is a list of main features:
 
@@ -13,18 +13,18 @@ The sheet doesn't need to be publicly available on the Internet. The device does
 
 Below is a brief description how the project can be built. More details can be found in the following articles:
 
-*  [MicroPython on ESP32: sending data to Google Sheets](https://blog.gypsyengineer.com/en/diy-electronics/micropython-on-esp32-sending-data-to-google-sheets.html)
-*  [Weather station based on ESP32 and MicroPython](https://blog.gypsyengineer.com/en/diy-electronics/weather-station-based-on-esp32-and-micropython.html)
+*  [MicroPython on ESP32 & ESP8266: sending data to Google Sheets](https://blog.gypsyengineer.com/en/diy-electronics/micropython-on-ESP32 & ESP8266-sending-data-to-google-sheets.html)
+*  [Weather station based on ESP32 & ESP8266 and MicroPython](https://blog.gypsyengineer.com/en/diy-electronics/weather-station-based-on-ESP32 & ESP8266-and-micropython.html)
 
 ## How to make a weather station
 
-Here is a [circuit](circuit/ESP32_weather_station_schem.png) and a [breadboard view](circuit/ESP32_weather_station_bb.png).
+Here is a [circuit](circuit/ESP32 & ESP8266_weather_station_schem.png) and a [breadboard view](circuit/ESP32 & ESP8266_weather_station_bb.png).
 
 The project uses [MicroPython 1.11](https://github.com/micropython/micropython/tree/v1.11). Older or newer versions may also work. The project uses the following tools:
 
-*  `esptool` for flashing ESP32
-*  `mpfshell` for uploading files to ESP32
-*  `minicom` for connecting to ESP32 for debugging purposes
+*  `esptool` for flashing ESP32 & ESP8266
+*  `mpfshell` for uploading files to ESP32 & ESP8266
+*  `minicom` for connecting to ESP32 & ESP8266 for debugging purposes
 *  `openssl` and `rsa` package for reading cryptographic keys
 
 ### Preparing a service account in Google IAM
@@ -65,7 +65,7 @@ Share the sheet with your service account. The sheet doesn't need to be publicly
 
 ### Uploading MicroPython
 
-The following scripts may be used to upload MicroPython to ESP32:
+The following scripts may be used to upload MicroPython to ESP32 & ESP8266:
 
 ```
 $ sh scripts/erase.sh
@@ -77,7 +77,7 @@ $ sh scripts/verify.sh
 
 You can run `sh scripts/upload.sh` to upload the code, the configuration file and the key.
 
-Then, you can connect to the board with `sh scripts/minicon.sh` command to check if everything works fine.
+Then, you can find out some ways to connect to the board with `sh scripts/minicom.sh` command to check if everything works fine.
 
 ### Configuration mode
 
