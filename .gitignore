@@ -1,7 +1,5 @@
-device.log
-key.json
-google_key.json
-__pycache__
-main.conf
-key.json
-decent-bird-key.json
+credentials.json
+token.pickle
+decent-bird-service-key.json
+__pycache__/
+
