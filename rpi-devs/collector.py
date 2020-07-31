@@ -1,28 +1,33 @@
 from datetime import datetime, time
 from keys import weatherapikey as key # weatherapi.com
-from keys import loca  # location in lat,lon
+from keys import loca
 import requests, json
 now_time = datetime.now().time()
-#import Adafruit_DHT
+import Adafruit_DHT
+from gpiozero import InputDevice as d
+
 #keys lib is ignored.
 
 class NewData:
-    def __init__(self, debug=False):
-        self.url = 'http://api.weatherapi.com/v1/current.json?key='+key+'&q='+loca
+    def __init__(self, update=False, debug=False):
         self.debug = debug
+        self.rain = d(18).is_active
+        self.loca = loca if not update else self.update_loca()
+        self.url = 'http://api.weatherapi.com/v1/current.json?key='+key+'&q='+self.loca
         self.get_weather()
 
     def get_temp(self):
-        #if self.debug: print('get_temp: getting h & t ... ')
-        #return Adafruit_DHT.read_retry(Adafruit_DHT.DHT11 , 23)
-        return 90.2, 26.8
-    
+        if self.debug: print('get_temp: getting h & t ... ')
+        return Adafruit_DHT.read_retry(Adafruit_DHT.DHT11 , 14)
+
+    def update_loca(self):
+        lat = input('lat: ')
+        lon = input('lon: ')
+        return lat+','+lon
+
     def get_weather(self):
         res = requests.get(url=self.url)
         self.weather = json.loads(res.text)['current']
-
-    def is_raining(self):
-        return 0
 
     def get(self):
         h, t= None, None
@@ -37,30 +42,30 @@ class NewData:
         new_data.append(t) # B Done TEMP
         new_data.append(h) # C Done HUMIDITY
         if self.debug: print('sensors: h & t append done.') if not h is None else print ('sensor error.')
-        new_data.append(0) if now_time >= time(18,00) or now_time <= time(6,00) else new_data.append(1) # D Done Day Time
-        if self.debug: print('sensors: is_day append done.')
-        new_data.append(self.is_raining()) # E Done Raining
+        # new_data.append(0) if now_time >= time(18,00) or now_time <= time(6,00) else new_data.append(1) # D Done Day Time
+        # if self.debug: print('sensors: is_day append done.')
+        new_data.append(0) if self.rain else new_data.append(1) # D Done Raining
         if self.debug: print('sensors: is_raining append done.')
 
         if self.debug: print('collecting weather data.')
         temp_c = self.weather['temp_c']
         humidity = self.weather['humidity']
         wind_kph = self.weather['wind_kph']
-        wind_dir = self.weather['wind_dir']
-        pressure_in = self.weather['pressure_in']
-        cloud = self.weather['cloud']
-        vis_km = self.weather['vis_km']
-        uv = self.weather['uv']
+        # wind_dir = self.weather['wind_dir']
+        # pressure_in = self.weather['pressure_in']
+        # cloud = self.weather['cloud']
+        # vis_km = self.weather['vis_km']
+        # uv = self.weather['uv']
 
-        new_data.append(temp_c)    #F
-        new_data.append(humidity)  #G
-        new_data.append(wind_kph)  #H
-        new_data.append(wind_dir)  #I
-        new_data.append(vis_km)    #J
-        new_data.append(cloud)     #K
-        new_data.append(uv)        #L
-        new_data.append('--Decision--')
-        new_data.append('Bongo!') #N
+        new_data.append(temp_c)    #E
+        new_data.append(humidity)  #F
+        new_data.append(wind_kph)  #G
+        # new_data.append(wind_dir) 
+        # new_data.append(vis_km)   
+        # new_data.append(cloud)    
+        # new_data.append(uv)       
+        new_data.append('--Decision--') #H
+        # new_data.append('Bongo!') 
 
         if self.debug: print('sensors: all done.')
         return new_data

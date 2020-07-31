@@ -17,10 +17,10 @@ class WorkSheet:
 
     def post_batch(self, limiter, data_list, cloudUpdate=True):
         if self.debug: print('post batch function')
-        #if self.debug: 
         print(limiter)
         print(data_list)
         self.worksheet.update(limiter, [data_list]) if cloudUpdate else print('cloudUpdate bypassed.')
+        if self.debug: print('data posted.')
 
 def get_wsheet():
     gc = gspread.service_account('./decent-bird-service-key.json')
