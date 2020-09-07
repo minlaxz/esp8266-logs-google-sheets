@@ -17,7 +17,7 @@ class NewData:
         self.get_weather()
 
     def get_temp(self):
-        if self.debug: print('get_temp: getting h & t ... ')
+        if self.debug: log.this('get_temp: getting h & t ... ')
         return Adafruit_DHT.read_retry(Adafruit_DHT.DHT11 , 4)
 
     def update_loca(self):
@@ -32,24 +32,24 @@ class NewData:
     def get(self):
         h, t= None, None
 
-        if self.debug: print('sensors.get function')
+        if self.debug: log.this('sensors.get function')
         new_data = list()
-        if self.debug: print('sensors: getting sensor data.')
+        if self.debug: log.this('sensors: getting sensor data.')
         new_data.append(str(datetime.now())) #
-        if self.debug: print('sensors: date append done.')
+        if self.debug: log.this('sensors: date append done.')
         h, t = self.get_temp()
-        if self.debug: print('sensors: getting h & t ... done.') if h and t is not None else print('sensors: sensor error.')
+        if self.debug: log.this('sensors: getting h & t ... done.') if h and t is not None else log.this('sensors: sensor error.')
         new_data.append(t) # B 
         new_data.append(h) # C 
-        if self.debug: print('sensors: h & t append done.') if not h is None else print ('sensor error.')
+        if self.debug: log.this('sensors: h & t append done.') if not h is None else log.this ('sensor error.')
         
         # new_data.append(0) if now_time >= time(18,00) or now_time <= time(6,00) else new_data.append(1) # D Done Day Time
-        # if self.debug: print('sensors: is_day append done.')
+        # if self.debug: log.this('sensors: is_day append done.')
         
         new_data.append(0) if self.rain else new_data.append(1) # D Done Raining
-        if self.debug: print('sensors: is_raining append done.')
+        if self.debug: log.this('sensors: is_raining append done.')
 
-        if self.debug: print('collecting weather data.')
+        if self.debug: log.this('collecting weather data.')
         temp_c = self.weather['temp_c']
         humidity = self.weather['humidity']
         wind_kph = self.weather['wind_kph']
@@ -73,6 +73,6 @@ class NewData:
         
         # new_data.append('Bongo!') 
 
-        if self.debug: print('sensors: all done.')
+        if self.debug: log.this('sensors: all done.')
         return new_data
 

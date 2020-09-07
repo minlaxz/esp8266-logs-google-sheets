@@ -2,11 +2,10 @@
 src/-> https://github.com/minlaxz/logs-to-sheets
 edited/-> ~/.bashrc 'to auto activate python enviroment named (g)'
 """
-
-
 from worksheet import WorkSheet as green_apple
 import anydata as rake
 import time
+import log
 
 def main():
     while(True):
@@ -32,10 +31,10 @@ def main():
             time.sleep(3)
             if not deadlock: break
         except KeyboardInterrupt:
-            print('user stopped')
+            log.this('user stopped')
             break
         except Exception as e:
-            print(e)
+            log.this(e)
             break
 
 
