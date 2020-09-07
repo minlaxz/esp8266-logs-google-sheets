@@ -2,9 +2,10 @@ from datetime import datetime, time
 from keys import weatherapikey as key # weatherapi.com
 from keys import loca
 import requests, json
-now_time = datetime.now().time()
 import Adafruit_DHT
 from gpiozero import InputDevice as d
+
+now = datetime.time().now()
 
 #keys lib is ignored.
 
@@ -18,7 +19,7 @@ class NewData:
 
     def get_temp(self):
         if self.debug: print('get_temp: getting h & t ... ')
-        return Adafruit_DHT.read_retry(Adafruit_DHT.DHT11 , 14)
+        return Adafruit_DHT.read_retry(Adafruit_DHT.DHT11 , 4)
 
     def update_loca(self):
         lat = input('lat: ')

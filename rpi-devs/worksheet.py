@@ -3,8 +3,8 @@ class WorkSheet:
     def __init__(self, worksheet, debug=False):
         print('main program started.')
         self.debug = debug
-        self.worksheet = worksheet
-    
+        self.get_wsheet()
+
     def get_last_row(self):
         if self.debug: print('get_data function')
         return len(self.worksheet.get_all_values()) # 2 including header.
@@ -22,7 +22,7 @@ class WorkSheet:
         self.worksheet.update(limiter, [data_list]) if cloudUpdate else print('cloudUpdate bypassed.')
         if self.debug: print('data posted.')
 
-def get_wsheet():
-    gc = gspread.service_account('./decent-bird-service-key.json')
-    sh = gc.open_by_key('1gpKJUcVOu1Bc4qD1ITlBPY2K8sTd4G4mv0M60f9XyvY')
-    return sh.get_worksheet(0)
+    def get_wsheet(self):
+        gc = gspread.service_account('./service-key.json')
+        sh = gc.open_by_key('1NrWpVEM_BgzVnSMemE7ZGrNUdwRibCW8feSKzS5bRds')
+        self.worksheet = sh.get_worksheet(0)
