@@ -5,7 +5,6 @@ import requests, json
 import Adafruit_DHT
 from gpiozero import InputDevice as d
 
-now = datetime.time().now()
 
 #keys lib is ignored.
 
@@ -36,15 +35,17 @@ class NewData:
         if self.debug: print('sensors.get function')
         new_data = list()
         if self.debug: print('sensors: getting sensor data.')
-        new_data.append(str(datetime.now())) # A Done DATE
+        new_data.append(str(datetime.now())) #
         if self.debug: print('sensors: date append done.')
         h, t = self.get_temp()
         if self.debug: print('sensors: getting h & t ... done.') if h and t is not None else print('sensors: sensor error.')
-        new_data.append(t) # B Done TEMP
-        new_data.append(h) # C Done HUMIDITY
+        new_data.append(t) # B 
+        new_data.append(h) # C 
         if self.debug: print('sensors: h & t append done.') if not h is None else print ('sensor error.')
+        
         # new_data.append(0) if now_time >= time(18,00) or now_time <= time(6,00) else new_data.append(1) # D Done Day Time
         # if self.debug: print('sensors: is_day append done.')
+        
         new_data.append(0) if self.rain else new_data.append(1) # D Done Raining
         if self.debug: print('sensors: is_raining append done.')
 
@@ -52,6 +53,7 @@ class NewData:
         temp_c = self.weather['temp_c']
         humidity = self.weather['humidity']
         wind_kph = self.weather['wind_kph']
+
         # wind_dir = self.weather['wind_dir']
         # pressure_in = self.weather['pressure_in']
         # cloud = self.weather['cloud']
@@ -61,11 +63,14 @@ class NewData:
         new_data.append(temp_c)    #E
         new_data.append(humidity)  #F
         new_data.append(wind_kph)  #G
+
         # new_data.append(wind_dir) 
         # new_data.append(vis_km)   
         # new_data.append(cloud)    
-        # new_data.append(uv)       
+        # new_data.append(uv)
+        
         new_data.append('--Decision--') #H
+        
         # new_data.append('Bongo!') 
 
         if self.debug: print('sensors: all done.')
