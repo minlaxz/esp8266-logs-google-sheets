@@ -1,6 +1,5 @@
 from datetime import datetime
-from .keys import weatherapikey  # weatherapi.com
-from .keys import location
+from keys import weatherapikey, location  # weatherapi.com
 import requests, json, pylaxz
 import Adafruit_DHT as ada
 from gpiozero import InputDevice as in_device

@@ -3,8 +3,8 @@ src/-> https://github.com/minlaxz/logs-to-sheets
 edited/-> ~/.bashrc 'to auto activate python enviroment named (g)'
 """
 
-from .worksheet import WorkSheet
-from . import datacollector as dc
+from worksheet import WorkSheet
+import datacollector as dc
 import time
 import pylaxz
 
