@@ -1,12 +1,12 @@
 from datetime import datetime, time
 from keys import weatherapikey as key # weatherapi.com
-from keys import loca
+from keys import location as loca
 import requests, json
 import Adafruit_DHT
 import time
 from gpiozero import InputDevice as d
 import math
-import utils
+import worksheet as utils
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -81,7 +81,7 @@ mo = 147.2*(101.0-ffmc) / (59.5+ffmc)
 ff = 19.115*math.exp(mo*-0.1386) * (1.0+(mo**5.31)/49300000.0)
 isi = ff * math.exp(0.05039*wind)
 #rainr= 0.5
-wk = utils.WorkSheet(worksheet=utils.get_wsheet())
+wk = utils.WorkSheet()
 
 dataset = pd.read_csv(r'/home/pi/Desktop/forestfires.csv')
 X = dataset.iloc[:, 0:12].values
